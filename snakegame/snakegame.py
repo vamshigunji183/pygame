@@ -56,16 +56,16 @@ def game_loop():
 
             if event.type==pygame.KEYDOWN:
                 if event.key==pygame.K_LEFT:
-                    x_change=-5
+                    x_change=-2
                     y_change=0
                 if event.key==pygame.K_RIGHT:
-                    x_change= 5
+                    x_change= 2
                     y_change = 0
                 if event.key==pygame.K_UP:
-                    y_change= -5
+                    y_change= -2
                     x_change = 0
                 if event.key==pygame.K_DOWN:
-                    y_change= 5
+                    y_change= 2
                     x_change = 0
 
             '''if event.type==pygame.KEYUP:
