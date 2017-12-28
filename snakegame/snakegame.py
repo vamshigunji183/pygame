@@ -11,6 +11,8 @@ black=(0,0,0)
 white=(255,255,255)
 red=(255,0,0)
 
+block_size = 10
+
 gameDisplay = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption('SnakeGame')
 clock = pygame.time.Clock()
@@ -23,7 +25,7 @@ def food(foodx, foody, foodw, foodh, color):
 
 def snakes(block_size,snakelist):
     for XnY in snakelist:
-        pygame.draw.rect(gameDisplay, black, [XnY[0], XnY[1], snakew, snakeh])
+        pygame.draw.rect(gameDisplay, black, [XnY[0], XnY[1],block_size,block_size])
 
 
 
@@ -31,8 +33,7 @@ def game_loop():
     snake_startx = 400
     snake_starty = 300
 
-    snake_width = 10
-    snake_height = 10
+
 
     food_startx = round(random.randrange(0, display_width)/10.0)
     food_starty = round(random.randrange(0, display_height)/10.0)
@@ -42,6 +43,9 @@ def game_loop():
     gameExit=False
     x_change=0
     y_change=0
+
+    snakeList = []
+    
     while not gameExit:
 
         for event in pygame.event.get():
@@ -77,8 +81,15 @@ def game_loop():
         snake_starty += y_change
 
         gameDisplay.fill(white)
-        snakes(block_size,snakelist)
+
         food(food_startx, food_starty, food_width, food_height, red)
+
+
+        snakeHead=[]
+        snakeHead.append(snake_startx)
+        snakeHead.append(snake_starty)
+        snakeList.append(snakeHead)
+        snakes(block_size, snakeList)
 
         distance=((snake_startx-food_startx)**2+(snake_starty-food_starty)**2)**0.5
         if(distance<10):
