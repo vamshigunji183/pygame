@@ -45,7 +45,8 @@ def game_loop():
     y_change=0
 
     snakeList = []
-    
+    snakeLength = 1
+
     while not gameExit:
 
         for event in pygame.event.get():
@@ -84,7 +85,8 @@ def game_loop():
 
         food(food_startx, food_starty, food_width, food_height, red)
 
-
+        if(len(snakeList)>snakeLength):
+            del snakeList[0]
         snakeHead=[]
         snakeHead.append(snake_startx)
         snakeHead.append(snake_starty)
@@ -94,6 +96,7 @@ def game_loop():
         distance=((snake_startx-food_startx)**2+(snake_starty-food_starty)**2)**0.5
         if(distance<10):
             print("ate")
+            snakeLength+=10
             food_startx = round(random.randrange(0, display_width))
             food_starty = round(random.randrange(0, display_height))
 
